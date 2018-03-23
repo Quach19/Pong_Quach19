@@ -16,7 +16,8 @@ import android.view.View.OnTouchListener;
  * 
  * @author Steve Vegdahl
  * @author Andrew Nuxoll
- * @version February 2016
+ * @author Michael Quach
+ * @version March 22, 2018
  * 
  * 
  */
@@ -28,13 +29,13 @@ public class AnimationSurface extends SurfaceView implements OnTouchListener {
 	private Paint backgroundPaint = new Paint(); // painter for painting background
 	private int flashCount; // counts down ticks for background-flash
 	private Paint flashPaint; // has color for background flash
-	
+
 	/**
 	 * Constructor for the AnimationSurface class. In order to be useful, an
 	 * object must be supplied that implements the Animator interface. This
 	 * can either be done by overriding the 'createAnimator' method (which by
 	 * default give null, or by invoking the setAnimator method.
-	 * 
+	 *
 	 * @param context
 	 *            - a reference to the activity this animation is run under
 	 */
@@ -42,12 +43,12 @@ public class AnimationSurface extends SurfaceView implements OnTouchListener {
 		super(context);
 		init();
 	}// ctor
-	
+
 	/**
 	 * An alternate constructor for use when a subclass is directly specified
 	 * in the layout. It is expected that the subclass will have overridden
 	 * the 'createAnimator' method.
-	 * 
+	 *
 	 * @param context
 	 *            - a reference to the activity this animation is run under
 	 * @param attrs
@@ -57,7 +58,7 @@ public class AnimationSurface extends SurfaceView implements OnTouchListener {
 		super(context, attrs);
 		init();
 	}// ctor
-	
+
 	/**
 	 * Helper-method for the constructors
 	 */
@@ -68,15 +69,15 @@ public class AnimationSurface extends SurfaceView implements OnTouchListener {
 
 		// initialize the animator instance variable animator-creation method
 		animator = createAnimator();
-		
+
 		//Begin listening for touch events
 		this.setOnTouchListener(this);
-		
+
 		if (animator != null) {
 			startAnimation();
 		}
 	}// init
-	
+
 	/**
 	 * Starts the animation
 	 */
@@ -90,7 +91,7 @@ public class AnimationSurface extends SurfaceView implements OnTouchListener {
 		// Initialize the background color paint as instructed by the animator
 		backgroundPaint.setColor(animator.backgroundColor());
 	}
-	
+
 	/**
 	 * Creates the animator for the object. If this method returns null, then it will
 	 * be necessary to invoke the 'setAnimator' method before the animation can start.
@@ -99,11 +100,11 @@ public class AnimationSurface extends SurfaceView implements OnTouchListener {
 	public Animator createAnimator() {
 		return null;
 	}
-	
+
 	/**
 	 * Sets and starts the animator for the AnimationSurface if it does not already
 	 * have an animator.
-	 * 
+	 *
 	 * @param animator the animator to use.
 	 */
 	public void setAnimator(Animator animator) {
@@ -130,10 +131,10 @@ public class AnimationSurface extends SurfaceView implements OnTouchListener {
 
 	/**
 	 * Thread subclass to control the game loop
-	 * 
+	 *
 	 * Code adapted from Android:How to Program by Deitel, et.al., first edition
 	 * copyright (C)2013.
-	 * 
+	 *
 	 */
 	private class AnimationThread extends Thread {
 
@@ -152,7 +153,7 @@ public class AnimationSurface extends SurfaceView implements OnTouchListener {
 
 		/**
 		 * causes this thread to pause for a given interval.
-		 * 
+		 *
 		 * @param interval
 		 *            duration in milliseconds
 		 */
@@ -163,11 +164,11 @@ public class AnimationSurface extends SurfaceView implements OnTouchListener {
 				// don't care if we're interrupted
 			}
 		}// sleep
-		
+
 		/**
 		 * Causes the background to be changed ("flash") for the given period
 		 * of time.
-		 * 
+		 *
 		 * @param color
 		 * 			the color to flash
 		 * @param millis
@@ -212,18 +213,18 @@ public class AnimationSurface extends SurfaceView implements OnTouchListener {
 				try {
 					// lock the surface for drawing
 					canvas = surfaceHolder.lockCanvas(null);
-					
+
 					//paint the background
 					if (canvas != null) {
 						// draw the background
 						if (flashCount > 0) {
 							// we are flashing: draw the "flash" color
 							canvas.drawRect(0,0,getWidth(),getHeight(), flashPaint);
-							
+
 							// decrement the flash count by the number of milliseconds in
 							// our interval
 							flashCount -= animator.interval();
-							
+
 							// if we've finished, "release" the flash-painting object
 							if (flashCount <= 0) {
 								flashPaint = null;
@@ -254,7 +255,7 @@ public class AnimationSurface extends SurfaceView implements OnTouchListener {
 		}// run
 	}
 
-	/** 
+	/**
 	 * if I am touched, pass the touch event to the animator
 	 */
 	public boolean onTouch(View v, MotionEvent event) {

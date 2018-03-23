@@ -3,6 +3,8 @@ package cs301.pong;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
+import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 /**
@@ -13,10 +15,14 @@ import android.widget.LinearLayout;
  * 
  * @author Andrew Nuxoll
  * @author Steven R. Vegdahl
- * @version July 2013
+ * @author Michael Quach
+ * @version March 22, 2018
  * 
  */
 public class PongMainActivity extends Activity {
+
+	//creates a new instance of the test animator
+	TestAnimator testAnimator = new TestAnimator();
 
 	/**
 	 * creates an AnimationSurface containing a TestAnimator.
@@ -29,6 +35,30 @@ public class PongMainActivity extends Activity {
 		// Connect the animation surface with the animator
 		AnimationSurface mySurface = (AnimationSurface) this
 				.findViewById(R.id.animationSurface);
-		mySurface.setAnimator(new TestAnimator());
+		mySurface.setAnimator(testAnimator);
+
+		//Register buttons for player to select
+		Button smallPaddle = (Button)findViewById(R.id.smallButton);
+		Button largePaddle = (Button)findViewById(R.id.largeButton);
+
+		//Connect buttons to On-click listeners
+		smallPaddle.setOnClickListener(this);
+		largePaddle.setOnClickListener(this);
+	}
+
+	/**
+	 * on-Click listener to register button inputs
+	 */
+	@Override
+	public void onClick(View v) {
+		//Change paddle size to small if button pressed
+		if(v.getId() == R.id.bigButton) {
+			testAnimator.setPaddleSmall();
+		}
+
+		//Change paddle size to large if button pressed
+		else if(v.getId() == R.id.smallButton) {
+			testAnimator.setPaddleLarge();
+		}
 	}
 }
