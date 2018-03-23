@@ -22,7 +22,7 @@ import android.widget.LinearLayout;
 public class PongMainActivity extends Activity {
 
 	//creates a new instance of the test animator
-	TestAnimator testAnimator = new TestAnimator();
+	BallAnimator ballAnimator = new BallAnimator();
 
 	/**
 	 * creates an AnimationSurface containing a TestAnimator.
@@ -35,7 +35,7 @@ public class PongMainActivity extends Activity {
 		// Connect the animation surface with the animator
 		AnimationSurface mySurface = (AnimationSurface) this
 				.findViewById(R.id.animationSurface);
-		mySurface.setAnimator(testAnimator);
+		mySurface.setAnimator(ballAnimator);
 
 		//Register buttons for player to select
 		Button smallPaddle = (Button)findViewById(R.id.smallButton);
@@ -53,12 +53,12 @@ public class PongMainActivity extends Activity {
 	public void onClick(View v) {
 		//Change paddle size to small if button pressed
 		if(v.getId() == R.id.bigButton) {
-			testAnimator.setPaddleSmall();
+			ballAnimator.setPaddleSmall();
 		}
 
 		//Change paddle size to large if button pressed
 		else if(v.getId() == R.id.smallButton) {
-			testAnimator.setPaddleLarge();
+			ballAnimator.setPaddleLarge();
 		}
 	}
 }

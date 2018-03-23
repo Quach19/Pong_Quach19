@@ -9,7 +9,8 @@ import android.view.MotionEvent;
  * 
  * @author Steve Vegdahl
  * @author Andrew Nuxoll
- * @version February 2016
+ * @author Michael Quach
+ * @version March 22, 2018
  */
 
 public interface Animator {

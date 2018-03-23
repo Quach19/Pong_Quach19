@@ -8,13 +8,17 @@ import java.util.Random;
 /**
  * class that animates a ball repeatedly moving on a
  * simple background
+ *
+ * The biggest issue I had with this project was my version of Android
+ * Studio not syncing correcting, preventing me from actually testing
+ * the game out. I had to go on campus to test it out on the computers.
  * 
  * @author Steve Vegdahl
  * @author Andrew Nuxoll
  * @author Michael Quach
  * @version March 22, 2018
  */
-public class TestAnimator implements Animator {
+public class BallAnimator implements Animator {
 
 	//instance variables
 	private final int ballRadius = 30; //radius of the ball ball
@@ -37,7 +41,7 @@ public class TestAnimator implements Animator {
 
 	private Random gen = new Random(); //create a random number generator
 
-	public TestAnimator(){
+	public BallAnimator(){
 		//Set a randomized coordinate for the ball to be placed
 		x = gen.nextInt(500);
 		y = gen.nextInt(500);
@@ -255,4 +259,4 @@ public class TestAnimator implements Animator {
 	 Solution: I used the example code from this post.
 	 */
 
-}//class TextAnimator
+}//class BallAnimator
