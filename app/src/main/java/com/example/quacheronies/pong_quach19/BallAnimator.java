@@ -52,7 +52,7 @@ public class BallAnimator implements Animator {
 	private Random gen = new Random(); //create a random number generator
 
 	public BallAnimator(){
-		score = 0;
+		score = 0; //initialize scores
 		//Set a randomized coordinate for the ball to be placed
 		x = gen.nextInt(500);
 		y = gen.nextInt(500);
@@ -68,6 +68,15 @@ public class BallAnimator implements Animator {
 	public int backgroundColor() {
 		// create/return the background color
 		return Color.rgb(180, 200, 255);
+	}
+
+	/**
+	 * Randomize the ball speed
+	 *
+	 * @return float speed
+	 */
+	public float randomBallSpeed() {
+		return 2 + (float)Math.random();
 	}
 
 	/**
