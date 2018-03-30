@@ -23,6 +23,9 @@ public class BallAnimator implements Animator {
 	//instance variables
 	private final int ballRadius = 30; //radius of the ball ball
 
+	private int width; //width of surface view
+	private int height; //height of surface view
+
 	private float x; //create a variable for the x position of the ball
 	private float y; //create a variable for the y position of the ball
 	private float diffX; //create a variable for the difference in x of the ball
@@ -30,18 +33,26 @@ public class BallAnimator implements Animator {
 	private float velX; //create a variable for the x velocity of the ball
 	private float velY; //create a variable for the x velocity of the ball
 
+	private int score = 0;
+	private int ballLoss = 5;
+
 	private Paint paint = new Paint(); //create a paint command for the layout
 
 	private boolean ballOut; //create a variable to check if the ball is
 	//currently in play
 	private boolean paddleSize; //create a variable to check if the
 	//paddle is small or large.
+	private float touchX;
+	private float touchY;
 
-	private String question = "Would you like to try again?"
+	private String question = "Would you like to try again?";
+	private String scoreUpdate = "" + score;
+	private String loss = "You have loss";
 
 	private Random gen = new Random(); //create a random number generator
 
 	public BallAnimator(){
+		score = 0;
 		//Set a randomized coordinate for the ball to be placed
 		x = gen.nextInt(500);
 		y = gen.nextInt(500);
@@ -86,6 +97,32 @@ public class BallAnimator implements Animator {
 			diffX = -velX;
 		}
 	}
+
+	/**
+	 * This displays the score for the current state.
+	 *
+	 * @param canvas
+	 */
+	private void drawScore(Canvas canvas) {
+		Paint scoreText = new Paint();
+		scoreText.setTextSize(1000.0f);
+		Typeface scoreTypeFace = Typeface.create(scoreText.getTypeface(), Typeface.BOLD);
+
+		/**
+		 External Citation
+		 Date: 29 March 2018
+		 Problem: Did not know how to adjust the text font.
+		 Resource:
+		 https://developer.android.com/reference/android/graphics/Typeface.html
+		 Solution: I used the Typeface reference.
+		 */
+
+		scoreText.setTypeface(scoreTypeFace);
+		scoreText.setTextAlign(Paint.Align.CENTER);
+		canvas.drawText(scoreUpdate, 0 ,scoreUpdate.length(), width/2,
+				height/2 + 1000.0f/3,scoreText);
+	}
+
 
 	/**
 	 * Paint the walls of the game on the Android layout
@@ -236,6 +273,9 @@ public class BallAnimator implements Animator {
 		drawWall(canvas); //paint the three walls
 		drawPaddle(canvas); //paint the paddle
 		ballAnimation(canvas); //paint the ball and its animations
+		drawScore(canvas);
+
+
 
 	}
 
@@ -247,6 +287,9 @@ public class BallAnimator implements Animator {
 	@Override
 	public void onTouch(MotionEvent event) {
 		ballOut = true; //if the ball goes out-of-bounds
+
+		touchX = event.getX();
+		touchY = event.getY();
 	}
 
 	/**
