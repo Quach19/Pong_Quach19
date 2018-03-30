@@ -16,7 +16,7 @@ import java.util.Random;
  * @author Steve Vegdahl
  * @author Andrew Nuxoll
  * @author Michael Quach
- * @version March 22, 2018
+ * @version March 29, 2018
  */
 public class BallAnimator implements Animator {
 

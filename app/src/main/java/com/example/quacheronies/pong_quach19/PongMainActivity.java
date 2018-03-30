@@ -11,12 +11,17 @@ import android.widget.LinearLayout;
  * PongMainActivity
  * 
  * This is the activity for the Pong game. It attaches a PongAnimator to
- * an AnimationSurface.
+ * an AnimationSurface. It contains all the relevant information to the game.
+ *
+ * Enhancements:
+ *  - [5%] Incorporate a certain randomness in the bouncing.
+ *  - [5%] Keep a running score.
+ *  - [5%] Have the game end when the user loses a certain number of balls.
  * 
  * @author Andrew Nuxoll
  * @author Steven R. Vegdahl
  * @author Michael Quach
- * @version March 22, 2018
+ * @version March 29, 2018
  * 
  */
 public class PongMainActivity extends Activity {
